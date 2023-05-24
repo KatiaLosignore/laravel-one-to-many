@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreProjectRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        return [
+            'title' => 'required|max:150|unique:projects',
+            'content' => 'nullable|string',
+            'image' => 'nullable|max:255|url',
+            'link_project' => 'nullable|url',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'title.required' => "Il campo Titolo è richiesto",
+            'title.max' => "Il titolo deve avere massimo 150 caratteri",
+            'title.unique' => "Il titolo è già stato inserito",
+            'content.string' => "Il campo descrizione deve essere di tipo stringa",
+            'image.max' => "L'url dell'immagine deve avere massimo 255 caratteri",
+            'image.url' => "L'url dell'immagine deve essere valida, esempio: http://www.miosito.com",
+            'link_project.url' => "Il link del progetto deve essere valido",         
+        ];
+    }
+}
