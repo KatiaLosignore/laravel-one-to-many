@@ -30,6 +30,7 @@ class UpdateProjectRequest extends FormRequest
             'content' => 'nullable|string',
             'image' => 'nullable|max:255|url',
             'link_project' => 'nullable|url',
+            'type_id' => 'nullable|exists:types,id'
         ];
     }
 
